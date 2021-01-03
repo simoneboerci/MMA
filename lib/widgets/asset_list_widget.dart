@@ -19,7 +19,17 @@ class AssetListWidget extends StatelessWidget{
           FundWidget(_assetsList.getInvestmentAccount()),
           FundWidget(_assetsList.getSpeculationAccount()),
           FundWidget(_assetsList.getSavingsAccount()),
-          FundWidget(_assetsList.getBonusAccount())
+          FundWidget(_assetsList.getBonusAccount()),
+          SizedBox(height: 5),
+          Divider(color: Colors.white, thickness: 1,),
+          SizedBox(height: 5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Asset Value: ", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+              Text(_assetsList.assetsValue().toStringAsFixed(2) + "€", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+            ],
+          ),
         ],
       ),
     );

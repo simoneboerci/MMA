@@ -10,10 +10,12 @@ class FundWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 5),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(_fund.getName()),
-          Text(_fund.getMoney().toStringAsFixed(2))
+          Text(_fund.getName() + ": ", style: TextStyle(color: Colors.white, fontSize: 20),),
+          Text(_fund.getMoney().toStringAsFixed(2) + "€", style: TextStyle(color: Colors.white, fontSize: 20),)
         ],
       ),
     );

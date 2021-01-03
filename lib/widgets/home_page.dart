@@ -4,6 +4,7 @@ import 'package:mma/data/percentage_sheet.dart';
 import 'package:mma/objects/default_mmc_func.dart';
 import 'package:mma/objects/money_management_calculator.dart';
 import 'package:mma/widgets/asset_list_widget.dart';
+import 'package:mma/widgets/rounded_button.dart';
 
 class HomePage extends StatefulWidget{
 
@@ -45,28 +46,59 @@ class HomePageState extends State{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(40),
-        child: Column(
-          children: [
-            TextField(
-              controller: _textEditingController,
-            ),
-            AssetListWidget(
-                _mma.getAssetsList()
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: RaisedButton(
-                child: Text("Calculate"),
-                onPressed: (){
-                  setState(() {
-                    _mma.run(double.parse(_textEditingController.text), DefaultMMCFunc());
-                  });
-                },
+      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.deepOrangeAccent,
+              Colors.orange,
+            ]
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextField(
+                cursorColor: Colors.white,
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                  hintText: "Write the amount of money to be sorted",
+                  hintStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Colors.white),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                style: TextStyle(
+                  color: Colors.white,
+                  decorationColor: Colors.white,
+                ),
               ),
-            ),
-          ],
+              AssetListWidget(
+                  _mma.getAssetsList()
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: RoundedButton(Icons.calculate, "CALCULATE", (){
+                  setState(() {
+                    _mma.run(double.tryParse(_textEditingController.text), DefaultMMCFunc());
+                  });
+                }, Colors.white, Colors.orange),
+              ),
+            ],
+          ),
         ),
       ),
     );
